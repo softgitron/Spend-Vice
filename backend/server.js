@@ -17,12 +17,13 @@ mongoose.connect(mongoUI, {useNewUrlParser: true, useUnifiedTopology: true},(err
 
 app.post("/newdata", (req, res) => {
     console.log("yolo");
-})
+});
 
 app.post("/getinfo", (req, res) => {
-    const data = res.json(req.body);
-    console.log(data.body);
-    res.status(204);
+    const data = req.body;
+    console.log(data);
+    console.log(req.body.this);
+    res.status(200).json();
 });
 
 app.get("/", (req, res) => {
