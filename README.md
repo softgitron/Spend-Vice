@@ -1,2 +1,2 @@
-# Spend-Vice
+# Spend-Wise
 Junction project work for Black Rock challenge
