@@ -57,7 +57,6 @@ app.post("/getinfo", (req, res) => {
                 console.log("document was not found");
                 res.status(404).send("The product could not be found in the database");
             }
-        }
         });
     });
 });
