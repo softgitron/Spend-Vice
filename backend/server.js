@@ -8,7 +8,7 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 
 const Data = require("./models/product");
-const User = require("./models/userinfo");
+const Buy = require("./models/userinfo");
 
 const mongoUI = "mongodb+srv://spend:wise@spendwisedata-gaqmj.mongodb.net/Datas";
 mongoose.connect(mongoUI, {useNewUrlParser: true, useUnifiedTopology: true},(err) => {
@@ -16,7 +16,6 @@ mongoose.connect(mongoUI, {useNewUrlParser: true, useUnifiedTopology: true},(err
     else {
         console.log("mongo connected!");
     }
-const db = mongoose.connection;
 });
 
 //-----------------------------REQUESTS-----------------------------
@@ -34,19 +33,18 @@ app.post("/finduserinfo", (req, res) => {
     });
 });
 
-app.post("/newuserproduct", (req, res) => {
+app.post("/newpurchase", (req, res) => {
     console.log(req.body);
-    User.findOneAndUpdate({username: req.body.username}, {
+    let newPurchase = new Buy({
         username: req.body.username,
-        password: req.body.password,
-        $push: {purchases: req.body.product}
-    }, {safe: true, upsert: true, useFindAndModify: false}, (err) => {
-        if (err) {
-            return res.status(500).send(err);
-        }
-        res.status(200).send("upload worked");
+        ean: req.body.ean,
+        buydate: Date.now()
     });
-})
+    newPurchase.save((err) => {
+        if (err) res.status(500).send(err);
+        res.status(200).send("purchase added");
+    });
+});
 
 app.post("/newdata", (req, res) => {
     console.log(req.body);
