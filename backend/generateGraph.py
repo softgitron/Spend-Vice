@@ -112,7 +112,7 @@ def plot(products):
                 path = "."
         randomInt = random.randrange(100000, 99999999)
         export_png(p, filename="{0}/plot{1}.png".format(path, randomInt))
-        print("{0}/plot{1}.png".format(path, randomInt))
+        print("/plot{0}.png".format(randomInt))
         sys.stdout.flush()
 
 main()
