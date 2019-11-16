@@ -89,6 +89,8 @@ app.post("/getinfo", (req, res) => {
         }
         responseJson = JSON.parse(output);
         console.log(responseJson);
+        productPrice = parseFloat(responseJson.Price);
+        productPhoto = responseJson.Image;
         productName = responseJson.Name;
         console.log(productName);
         //Finds the correct file
@@ -101,8 +103,19 @@ app.post("/getinfo", (req, res) => {
                 console.log("document was found");
                 res.status(200).json(document);
             } else {
-                console.log("document was not found");
-                res.status(404).send("The product could not be found in the database");
+                console.log("document was not found so let's create a new one.");
+                newProduct = new Data({
+                    name: productName,
+                    price: productPrice,
+                    photo: productPhoto,
+                    ean: Math.random() * 900000,
+                    co2: Math.random() * 100,
+                    usage: Math.random() * 2000
+                });
+                newProduct.save((err) => {
+                    if (err) res.status(500).send(err);
+                    res.status(200).json(newProduct);
+                });
             }
         });
     });
