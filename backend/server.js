@@ -39,7 +39,7 @@ app.post("/newuserproduct", (req, res) => {
     User.findOneAndUpdate({username: req.body.username}, {
         username: req.body.username,
         password: req.body.password,
-        $push: {purchases : req.body.ean}
+        $push: {purchases: req.body.product}
     }, {upsert: true, useFindAndModify: false}, (err) => {
         if (err) {
             return res.status(500).send(err);
