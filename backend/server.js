@@ -34,8 +34,8 @@ mongoose.connect(mongoUI, {useNewUrlParser: true, useUnifiedTopology: true},(err
 
 //-----------------------------REQUESTS-----------------------------
 app.post("/getgraph", (req, res) => {
-    console.log(req.body);
     const usern = req.body.username;
+    console.log(usern);
     const pythonProcess = spawn("python3", ["./generateGraph.py", usern, "./public"]);
     console.log("getgrapgh started?");
     pythonProcess.stdout.on("data", (data) => {
