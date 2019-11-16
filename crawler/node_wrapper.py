@@ -3,6 +3,7 @@ import sys
 import re
 import subprocess
 import os
+import json
 
 if (len(sys.argv) > 1):
     givenURL = sys.argv[1]
@@ -17,6 +18,14 @@ output = result.stderr.decode('utf-8')
 crawl = re.findall(r"\{\'Name\'.*?\}", output)
 if (crawl):
     crawl = crawl[0].replace("'", '"')
+    json_data = json.loads(crawl)
+    price = json_data['Price']
+    sanitized_price = ""
+    for letter in price:
+        if (letter.isdigit() == True or letter == '.'):
+            sanitized_price += letter
+    json_data['Price'] = float(sanitized_price)
+    crawl = json.dumps(json_data)
     print(crawl)
 else:
     print("ERROR")
