@@ -17,4 +17,4 @@ var UserSchema = new Schema({
 });
 
 const BuyModel = mongoose.model("BuyModel", UserSchema);
-module.exports = UserModel;
+module.exports = BuyModel;
