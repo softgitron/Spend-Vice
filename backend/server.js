@@ -92,7 +92,7 @@ app.post("/getinfo", (req, res) => {
         productPrice = parseFloat(responseJson.Price);
         productPhoto = responseJson.Image;
         productName = responseJson.Name;
-        console.log(productName);
+        console.log(productPrice);
         //Finds the correct file
         Data.findOne({name: productName}, (err, document) => {
             if (err) {
