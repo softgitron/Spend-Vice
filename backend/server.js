@@ -114,7 +114,7 @@ app.post("/getinfo", (req, res) => {
                 });
                 newProduct.save((err) => {
                     if (err) res.status(500).send(err);
-                    res.status(200).json(newProduct);
+                    res.status(200).send("please help!");
                 });
             }
         });
