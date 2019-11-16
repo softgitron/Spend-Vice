@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const spawn = require("child_process").spawn;
+
 const port = process.env.PORT || 5000;
 app.use(express.json());
 
@@ -37,14 +39,22 @@ app.post("/newdata", (req, res) => {
 
 app.post("/getinfo", (req, res) => {
     console.log(req.body);
-    Data.findOne({ean: req.body.ean}, (err, document) => {
+    const url = req.body.url;
+
+    const pythonProcess = spawn("python3", ["./dummy.py", url]);
+    pythonProcess.stdout.on("data", (data) => {
+        console.log("Python is being executed!");
+        console.log(data.toString());
+    });
+    res.end();
+    /*Data.findOne({ean: req.body.ean}, (err, document) => {
         if (err) {
             console.log("ean can't be found!");
             res.status(500).send(err);
         }
         if (document) console.log("document was found");
         res.status(200).send(document);
-    });
+    });*/
 });
 
 app.get("/", (req, res) => {
