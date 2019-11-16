@@ -70,7 +70,7 @@ def plot(products):
 
         colors = colors[0:len(purchases)]
 
-        #Calculate maxinum y-range for bar chart. Only check last and first items.
+        #Calculate maxinum y-range for the bar chart. Only check last and first items.
         sumV = []
         for i in range(0,2):
                 sum = 0
@@ -87,7 +87,7 @@ def plot(products):
 
         output_file("stacked.html")
 
-        p = figure(x_range=months, plot_height=250, title="Price breakdown for the next six months", toolbar_location=None, tools="")
+        p = figure(x_range=months, plot_height=960, title="Price breakdown for the next six months", toolbar_location=None, tools="")
 
         p.vbar_stack(purchases, x='months', width=0.45, color=colors, source=data, legend_label=purchases)
 
@@ -96,7 +96,7 @@ def plot(products):
         p.y_range.start = 0
         p.y_range.end = y_range_end
         #Don't touch, will F up formatting if more than ~3 items.
-        #p.plot_width = 400
+        p.plot_width = 540
         p.x_range.range_padding = 0.1
         p.xgrid.grid_line_color = None
         p.axis.minor_tick_line_color = None
