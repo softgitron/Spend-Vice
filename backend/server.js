@@ -100,6 +100,7 @@ app.post("/getinfo", (req, res) => {
     const pythonProcess = spawn("python3", ["../crawler/node_wrapper.py", url]);
     pythonProcess.stdout.on("data", (data) => {
         output = data.toString()
+        console.log(output);
         if (output === "ERROR") {
             console.log("IT DIDN'T WORK!!")
             res.status(401).send("Error in data extraction");
