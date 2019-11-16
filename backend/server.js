@@ -80,12 +80,18 @@ app.post("/getinfo", (req, res) => {
     console.log(req.body);
     const url = req.body.url;
     //Runs the python script that generates the EAN based on the url posted
-    const pythonProcess = spawn("python", ["./dummy.py", url]);
+    console.log("Python is being executed!");
+    const pythonProcess = spawn("python3", ["../crawler/node_wrapper.py", url]);
     pythonProcess.stdout.on("data", (data) => {
-        console.log("Python is being executed!");
-        console.log(data.toString());
+        output = data.toString()
+        if (output === "ERROR") {
+            res.status(401).send("Error in data extraction");
+        }
+        responseJson = JSON.parse(output)
+        productName = responseJson.Name;
+        console.log(productName);
         //Finds the correct file
-        Data.findOne({ean: data}, (err, document) => {
+        Data.findOne({name: productName}, (err, document) => {
             if (err) {
                 console.log("ean can't be found!");
                 res.status(500).send(err);
