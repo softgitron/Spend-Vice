@@ -18,6 +18,7 @@ class Product:
                 self.eurPerWeek = price / usage
                 self.nextSixMonths = [0, 0, 0, 0, 0, 0]
                 counter = self.usage - round(self.dateDiff.days / 7, 0)
+                print(self.name, "counter on: ", counter, self.dateDiff.days) 
                 index = 0
                 while (counter > 0 and index <= 5):
                         if (self.usage <= 4):
@@ -69,6 +70,19 @@ def plot(products):
 
         colors = colors[0:len(purchases)]
 
+        #Calculate maxinum y-range for bar chart. Only check last and first items.
+        sumV = []
+        for i in range(0,2):
+                sum = 0
+                for purchase in purchases:
+                        if (i == 0):
+                                sum += (data[purchase][0])
+                        else:
+                                nextSixMonths = data[purchase]
+                                sum += nextSixMonths[len(nextSixMonths) - 1]
+                sumV.append(sum)
+        
+        y_range_end = max(sumV) + max(sumV)/3
 
 
         output_file("stacked.html")
@@ -78,8 +92,9 @@ def plot(products):
         p.vbar_stack(purchases, x='months', width=0.45, color=colors, source=data, legend_label=purchases)
 
 
+
         p.y_range.start = 0
-        p.y_range.end = 50
+        p.y_range.end = y_range_end
         #Don't touch, will F up formatting if more than ~3 items.
         #p.plot_width = 400
         p.x_range.range_padding = 0.1
