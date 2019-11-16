@@ -107,7 +107,7 @@ def plot(products):
         show(p)
         
         if (len(sys.argv) > 2): 
-                path = sys.argv[1]
+                path = sys.argv[2]
         else:
                 path = "."
         randomInt = random.randrange(100000, 99999999)
