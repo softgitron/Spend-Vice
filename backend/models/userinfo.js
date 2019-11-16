@@ -6,15 +6,15 @@ var UserSchema = new Schema({
         type: String,
         required: true
     },
-    password: {
-        type: String,
+    ean: {
+        type: Number,
         required: true
     },
-    purchases: {
-        type: [Number],
+    buydate: {
+        type: Date,
         required: true
     }
 });
 
-const UserModel = mongoose.model("UserModel", UserSchema);
-module.exports = UserModel;
+const BuyModel = mongoose.model("BuyModel", UserSchema);
+module.exports = BuyModel;
