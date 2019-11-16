@@ -37,6 +37,7 @@ app.post("/getgraph", (req, res) => {
     console.log(req.body);
     const usern = req.body.username;
     const pythonProcess = spawn("python3", ["./generateGraph.py", usern, "./public"]);
+    console.log("getgrapgh started?");
     pythonProcess.stdout.on("data", (data) => {
         output = data.toString();
         console.log(output);
