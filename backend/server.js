@@ -66,7 +66,7 @@ app.post("/newpurchase", (req, res) => {
     console.log(req.body);
     let newPurchase = new Buy({
         username: req.body.username,
-        ean: req.body.ean,
+        ean: parseFloat(req.body.ean),
         buydate: Date.now()
     });
     newPurchase.save((err) => {
