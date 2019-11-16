@@ -101,6 +101,7 @@ app.post("/getinfo", (req, res) => {
     pythonProcess.stdout.on("data", (data) => {
         output = data.toString()
         if (output === "ERROR") {
+            console.log("IT DIDN'T WORK!!")
             res.status(401).send("Error in data extraction");
         }
         responseJson = JSON.parse(output);
