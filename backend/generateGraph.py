@@ -70,7 +70,7 @@ def plot(products):
 
         colors = colors[0:len(purchases)]
 
-        #Calculate maxinum y-range for bar chart. Only check last and first items.
+        #Calculate maxinum y-range for the bar chart. Only check last and first items.
         sumV = []
         for i in range(0,2):
                 sum = 0
