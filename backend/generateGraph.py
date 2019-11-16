@@ -82,7 +82,7 @@ def plot(products):
                                 sum += nextSixMonths[len(nextSixMonths) - 1]
                 sumV.append(sum)
         
-        y_range_end = max(sumV) + max(sumV)/3
+        y_range_end = max(sumV) + max(sumV)/2
 
 
         output_file("stacked.html")
