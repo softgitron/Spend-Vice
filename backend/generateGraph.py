@@ -18,7 +18,7 @@ class Product:
                 self.eurPerWeek = price / usage
                 self.nextSixMonths = [0, 0, 0, 0, 0, 0]
                 counter = self.usage - round(self.dateDiff.days / 7, 0)
-                print(self.name, "counter on: ", counter, self.dateDiff.days) 
+                #print(self.name, "counter on: ", counter, self.dateDiff.days) 
                 index = 0
                 while (counter > 0 and index <= 5):
                         if (self.usage <= 4):
@@ -70,7 +70,7 @@ def plot(products):
 
         colors = colors[0:len(purchases)]
 
-        #Calculate maxinum y-range for bar chart. Only check last and first items.
+        #Calculate maxinum y-range for the bar chart. Only check last and first items.
         sumV = []
         for i in range(0,2):
                 sum = 0
@@ -82,12 +82,12 @@ def plot(products):
                                 sum += nextSixMonths[len(nextSixMonths) - 1]
                 sumV.append(sum)
         
-        y_range_end = max(sumV) + max(sumV)/3
+        y_range_end = max(sumV) + max(sumV)/2
 
 
         output_file("stacked.html")
 
-        p = figure(x_range=months, plot_height=250, title="Price breakdown for the next six months", toolbar_location=None, tools="")
+        p = figure(x_range=months, plot_height=960, title="Price breakdown for the next six months", toolbar_location=None, tools="")
 
         p.vbar_stack(purchases, x='months', width=0.45, color=colors, source=data, legend_label=purchases)
 
@@ -96,7 +96,7 @@ def plot(products):
         p.y_range.start = 0
         p.y_range.end = y_range_end
         #Don't touch, will F up formatting if more than ~3 items.
-        #p.plot_width = 400
+        p.plot_width = 540
         p.x_range.range_padding = 0.1
         p.xgrid.grid_line_color = None
         p.axis.minor_tick_line_color = None
@@ -107,12 +107,12 @@ def plot(products):
         show(p)
         
         if (len(sys.argv) > 2): 
-                path = sys.argv[1]
+                path = sys.argv[2]
         else:
                 path = "."
         randomInt = random.randrange(100000, 99999999)
         export_png(p, filename="{0}/plot{1}.png".format(path, randomInt))
-        print("{0}/plot{1}.png".format(path, randomInt))
+        print("/plot{0}.png".format(randomInt))
         sys.stdout.flush()
 
 main()

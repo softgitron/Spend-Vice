@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const spawn = require("child_process").spawn;
+app.use(express.static('public'));
 
 const port = process.env.PORT || 5000;
 app.use(express.json());
@@ -32,6 +33,21 @@ mongoose.connect(mongoUI, {useNewUrlParser: true, useUnifiedTopology: true},(err
 });
 
 //-----------------------------REQUESTS-----------------------------
+app.post("/getgraph", (req, res) => {
+    const usern = req.body.username;
+    console.log(usern);
+    const pythonProcess = spawn("python3", ["./generateGraph.py", usern, "./public"]);
+    console.log("getgrapgh started?");
+    pythonProcess.stdout.on("data", (data) => {
+        output = data.toString();
+        console.log(output);
+        if (output === "ERROR") {
+            res.status(401).send("Error in data extraction");
+        }
+        res.send("http://23.101.59.215:5000"+output);
+    });
+});
+
 app.post("/finduserinfo", (req, res) => {
     console.log(req.body);
     User.findOne({username: req.body.username}, (err, document) => {
@@ -55,7 +71,7 @@ app.post("/newpurchase", (req, res) => {
     });
     newPurchase.save((err) => {
         if (err) res.status(500).send(err);
-        res.status(200).send("purchase added");
+        res.status(200);
     });
 });
 
@@ -81,14 +97,17 @@ app.post("/getinfo", (req, res) => {
     const url = req.body.url;
     //Runs the python script that generates the EAN based on the url posted
     console.log("Python3 is being executed!");
-    const pythonProcess = spawn("python3", ["../crawler/node_wrapper.py", url]);
+    const wrapperurl = "../crawler/node_wrapper.py";
+    const pythonProcess = spawn("python3", ["./dummy.py", url]);
     pythonProcess.stdout.on("data", (data) => {
         output = data.toString()
+        console.log(output);
         if (output === "ERROR") {
+            console.log("IT DIDN'T WORK!!")
             res.status(401).send("Error in data extraction");
         }
         responseJson = JSON.parse(output);
-        console.log(responseJson.Price);
+        //console.log(responseJson.Price);
         productPrice = responseJson.Price;
         productPhoto = responseJson.Image;
         productName = responseJson.Name;
