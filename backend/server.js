@@ -89,7 +89,7 @@ app.post("/getinfo", (req, res) => {
         }
         responseJson = JSON.parse(output);
         console.log(responseJson.Price);
-        productPrice = parseFloat(responseJson.Price);
+        productPrice = responseJson.Price;
         productPhoto = responseJson.Image;
         productName = responseJson.Name;
         console.log(productPrice);
@@ -108,7 +108,7 @@ app.post("/getinfo", (req, res) => {
                     name: productName,
                     price: productPrice,
                     photo: productPhoto,
-                    ean: Math.random() * 900000,
+                    ean: 100000 + Math.random() * 900000,
                     co2: Math.random() * 100,
                     usage: Math.random() * 2000
                 });
