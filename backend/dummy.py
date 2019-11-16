@@ -12,5 +12,7 @@ if sys.argv < 2:
 import sys
 
 dataToSendBack = sys.argv[1]
-print(dataToSendBack)
+generatedEAN = 430303030
+print(generatedEAN)
+##print(dataToSendBack)
 sys.stdout.flush()
