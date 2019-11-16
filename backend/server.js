@@ -53,7 +53,7 @@ app.post("/getinfo", (req, res) => {
             if (document) {
                 console.log("document was found");
                 res.status(200).json(document);
-            else {
+            } else {
                 console.log("document was not found");
                 res.status(404).send("The product could not be found in the database");
             }
