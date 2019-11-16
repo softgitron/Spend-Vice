@@ -1,6 +1,7 @@
 How to Run?
 
 pip install -r `requirements.txt`
+
 scrapy crawl amazon -a url=<product_url>
 
 Example: scrapy crawl amazon -a url=https://www.amazon.com/Bose-QuietComfort-Wireless-Headphones-Cancelling/dp/B0756CYWWD/https://www.amazon.com/Bose-QuietComfort-Wireless-Headphones-Cancelling/dp/B0756CYWWD/
