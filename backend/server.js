@@ -71,7 +71,7 @@ app.post("/newpurchase", (req, res) => {
     });
     newPurchase.save((err) => {
         if (err) res.status(500).send(err);
-        res.status(200).send("purchase added");
+        res.status(200);
     });
 });
 
@@ -105,7 +105,7 @@ app.post("/getinfo", (req, res) => {
             res.status(401).send("Error in data extraction");
         }
         responseJson = JSON.parse(output);
-        console.log(responseJson.Price);
+        //console.log(responseJson.Price);
         productPrice = responseJson.Price;
         productPhoto = responseJson.Image;
         productName = responseJson.Name;
