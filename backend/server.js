@@ -10,7 +10,20 @@ app.use(express.json());
 const Data = require("./models/product");
 const User = require("./models/userinfo");
 
-const mongoUI = "mongodb+srv://spend:wise@spendwisedata-gaqmj.mongodb.net/Datas";
+//-----------------------------DATABASE INITIALIZATION--------------
+const mongoUsername = process.env["DB_USERNAME"];
+const mongoPassword = process.env["DB_PASSWORD"];
+
+if (!mongoUsername  || !mongoPassword) {
+    console.log("You must define Mongo databse username and password.\n \
+                 Define variables using \
+                 'export DB_USERNAME=(user name)' and\n \
+                 'export DB_PASSWORD=(user password)'.");
+    process.exit(1);
+}
+
+const mongoUI = `mongodb+srv://${mongoUsername}:${mongoPassword}@spendwisedata-gaqmj.mongodb.net/Datas`;
+
 mongoose.connect(mongoUI, {useNewUrlParser: true, useUnifiedTopology: true},(err) => {
     if (err) console.log(err);
     else {
