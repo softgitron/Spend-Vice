@@ -87,7 +87,7 @@ def plot(products):
 
         output_file("stacked.html")
 
-        p = figure(x_range=months, plot_height=250, title="Price breakdown for the next six months", toolbar_location=None, tools="")
+        p = figure(x_range=months, plot_height=1080, title="Price breakdown for the next six months", toolbar_location=None, tools="")
 
         p.vbar_stack(purchases, x='months', width=0.45, color=colors, source=data, legend_label=purchases)
 
