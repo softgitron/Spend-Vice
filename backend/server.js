@@ -38,12 +38,13 @@ app.post("/getgraph", (req, res) => {
     const usern = req.body.username;
     const pythonProcess = spawn("python3", ["./generateGraph.py", usern, "./public"]);
     pythonProcess.stdout.on("data", (data) => {
-        output = data.toString()
+        output = data.toString();
         console.log(output);
         if (output === "ERROR") {
             res.status(401).send("Error in data extraction");
         }
         res.send("http://23.101.59.215:5000"+output);
+    });
 });
 
 app.post("/finduserinfo", (req, res) => {
