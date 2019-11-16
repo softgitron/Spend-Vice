@@ -50,8 +50,10 @@ app.post("/getinfo", (req, res) => {
                 console.log("ean can't be found!");
                 res.status(500).send(err);
             }
-            if (document) console.log("document was found");
-            res.status(200).send(document);
+            if (document) {
+                console.log("document was found");
+                res.status(200).json(document);
+        }
         });
     });
     //res.end();
