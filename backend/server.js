@@ -88,7 +88,7 @@ app.post("/getinfo", (req, res) => {
             res.status(401).send("Error in data extraction");
         }
         responseJson = JSON.parse(output);
-        console.log(responseJson);
+        console.log(responseJson.Price);
         productPrice = parseFloat(responseJson.Price);
         productPhoto = responseJson.Image;
         productName = responseJson.Name;
