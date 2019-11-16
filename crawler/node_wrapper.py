@@ -17,13 +17,27 @@ result = subprocess.run(['scrapy', 'crawl', 'amazon', '-a', 'url=' + givenURL], 
 output = result.stderr.decode('utf-8')
 crawl = re.findall(r"\{\'Name\'.*?\}", output)
 if (crawl):
-    crawl = crawl[0].replace("'", '"')
+    crawl = crawl[0]
+    flag = False
+    crawl_list = list(crawl)
+    for index in range(len(crawl)):
+        if (crawl[index] == '"' and flag == True):
+            flag = False
+        elif (crawl[index] == '"' and flag == False):
+            flag = True
+        if (crawl[index] == "'" and flag == False):
+            crawl_list[index] = '"'
+    crawl = ''.join(map(str, crawl_list)) 
     json_data = json.loads(crawl)
     price = json_data['Price']
     sanitized_price = ""
     for letter in price:
+        if (letter == "$" or letter == "€" or letter == " "):
+            continue
         if (letter.isdigit() == True or letter == '.'):
             sanitized_price += letter
+        else:
+            break
     json_data['Price'] = float(sanitized_price)
     crawl = json.dumps(json_data)
     print(crawl)
