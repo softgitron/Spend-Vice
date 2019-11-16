@@ -42,7 +42,7 @@ app.post("/getinfo", (req, res) => {
             console.log("ean can't be found!");
             res.status(500).send(err);
         }
-        console.log("document was found");
+        if (document) console.log("document was found");
         res.status(200).send(document);
     });
 });
