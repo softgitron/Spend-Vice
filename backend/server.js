@@ -97,7 +97,8 @@ app.post("/getinfo", (req, res) => {
     const url = req.body.url;
     //Runs the python script that generates the EAN based on the url posted
     console.log("Python3 is being executed!");
-    const pythonProcess = spawn("python3", ["../crawler/node_wrapper.py", url]);
+    const wrapperurl = "../crawler/node_wrapper.py";
+    const pythonProcess = spawn("python3", ["./dummy.py", url]);
     pythonProcess.stdout.on("data", (data) => {
         output = data.toString()
         console.log(output);
