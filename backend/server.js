@@ -71,7 +71,7 @@ app.post("/newpurchase", (req, res) => {
     });
     newPurchase.save((err) => {
         if (err) res.status(500).send(err);
-        res.status(200);
+        res.status(200).json({success: true});
     });
 });
 
