@@ -40,7 +40,7 @@ app.post("/newuserproduct", (req, res) => {
         username: req.body.username,
         password: req.body.password,
         $push: {purchases: req.body.product}
-    }, {upsert: true, useFindAndModify: false}, (err) => {
+    }, {safe: true, upsert: true, useFindAndModify: false}, (err) => {
         if (err) {
             return res.status(500).send(err);
         }
