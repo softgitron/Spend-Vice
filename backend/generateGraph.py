@@ -18,7 +18,7 @@ class Product:
                 self.eurPerWeek = price / usage
                 self.nextSixMonths = [0, 0, 0, 0, 0, 0]
                 counter = self.usage - round(self.dateDiff.days / 7, 0)
-                print(self.name, "counter on: ", counter, self.dateDiff.days) 
+                #print(self.name, "counter on: ", counter, self.dateDiff.days) 
                 index = 0
                 while (counter > 0 and index <= 5):
                         if (self.usage <= 4):
