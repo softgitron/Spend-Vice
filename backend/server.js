@@ -8,6 +8,7 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 
 const Data = require("./models/product");
+const User = require("./models/userinfo");
 
 const mongoUI = "mongodb+srv://spend:wise@spendwisedata-gaqmj.mongodb.net/Datas";
 mongoose.connect(mongoUI, {useNewUrlParser: true, useUnifiedTopology: true},(err) => {
@@ -19,9 +20,7 @@ const db = mongoose.connection;
 });
 
 app.post("/newdata", (req, res) => {
-    const data = req.body;
-    console.log(data);
-    //console.log(req.body);
+    console.log(req.body);
     Data.findOneAndUpdate({ean: req.body.ean}, {
         name: req.body.name,
         ean: req.body.ean,
@@ -40,11 +39,12 @@ app.post("/newdata", (req, res) => {
 app.post("/getinfo", (req, res) => {
     console.log(req.body);
     const url = req.body.url;
-
+    //Runs the python script that generates the EAN based on the url posted
     const pythonProcess = spawn("python", ["./dummy.py", url]);
     pythonProcess.stdout.on("data", (data) => {
         console.log("Python is being executed!");
         console.log(data.toString());
+        //Finds the correct file
         Data.findOne({ean: data}, (err, document) => {
             if (err) {
                 console.log("ean can't be found!");
@@ -53,16 +53,18 @@ app.post("/getinfo", (req, res) => {
             if (document) {
                 console.log("document was found");
                 res.status(200).json(document);
+            else {
+                console.log("document was not found");
+                res.status(404).send("The product could not be found in the database");
+            }
         }
         });
     });
-    //res.end();
-    
 });
 
 app.get("/", (req, res) => {
     console.log("homepage");
-    res.send("hello ttttthere");
+    res.send("This is our homepage. Get out!");
 });
 
 app.listen(port, () => console.log(`Listening to port number ${port}`));
