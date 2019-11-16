@@ -36,9 +36,9 @@ try:
                 sanitized_price += letter
             else:
                 break
-        if (sanitized_price.isdecimal()):
+        try:
             json_data['Price'] = float(sanitized_price)
-        else:
+        except:
             json_data['Price'] = 0
         if ('Name' in json_data):
             json_data['Name'] = json_data['Name'].strip()
