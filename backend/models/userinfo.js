@@ -11,7 +11,7 @@ var UserSchema = new Schema({
         required: true
     },
     purchases: {
-        type: [String],
+        type: [Number],
         required: true
     }
 });
