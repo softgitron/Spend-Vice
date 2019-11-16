@@ -45,16 +45,17 @@ app.post("/getinfo", (req, res) => {
     pythonProcess.stdout.on("data", (data) => {
         console.log("Python is being executed!");
         console.log(data.toString());
+        Data.findOne({ean: data}, (err, document) => {
+            if (err) {
+                console.log("ean can't be found!");
+                res.status(500).send(err);
+            }
+            if (document) console.log("document was found");
+            res.status(200).send(document);
+        });
     });
     //res.end();
-    Data.findOne({ean: data}, (err, document) => {
-        if (err) {
-            console.log("ean can't be found!");
-            res.status(500).send(err);
-        }
-        if (document) console.log("document was found");
-        res.status(200).send(document);
-    });
+    
 });
 
 app.get("/", (req, res) => {
