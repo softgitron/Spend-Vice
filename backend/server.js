@@ -130,7 +130,7 @@ app.post("/getinfo", (req, res) => {
                     photo: productPhoto,
                     ean: 100000 + Math.random() * 900000,
                     co2: Math.random() * 100,
-                    usage: Math.random() * 2000
+                    usage: Math.random() * 200
                 });
                 newProduct.save((err) => {
                     if (err) res.status(500).send(err);
