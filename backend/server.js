@@ -99,7 +99,7 @@ app.post("/getinfo", (req, res) => {
     console.log("Python3 is being executed!");
     const wrapperurl = "../crawler/node_wrapper.py";
     const dummyurl = "./dummy.py";
-    const pythonProcess = spawn("python3", [dummyurl, url]);
+    const pythonProcess = spawn("python3", [wrapperurl, url]);
     pythonProcess.stdout.on("data", (data) => {
         output = data.toString()
         console.log(output);
