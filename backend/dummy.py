@@ -17,7 +17,7 @@ elif (givenURL == "https://www.amazon.com/Sandisk-128GB-Flash-Memory-Drive/dp/B0
         "Image":"https://images-na.ssl-images-amazon.com/images/I/51dudPA-u4L._SL1100_.jpg",
         "Name":"Sandisk Flash Memory Drive"
     }
-elif (givenURL == "https://www.amazon.com/AmazonBasics-Hardside-Spinner-Luggage-20-Inch/dp/B071VG5N9D?pf_rd_p=8eb011f8-a9f1-4c31-a254-7a5f8477042c&pd_rd_wg=XWO5U&pf_rd_r=66M6HZ2P9QTK992J5CXE&ref_=pd_gw_unk&pd_rd_w=Potrc&pd_rd_r=87982f33-2aad-465a-85ca-70104eac5d22" or givenURL == "https://www.amazon.com/Sandisk-128GB-Flash-Memory-Drive/dp/B00P8XQPY4"):
+elif (givenURL == "https://www.amazon.com/AmazonBasics-Hardside-Spinner-Luggage-20-Inch/dp/B071VG5N9D?pf_rd_p=8eb011f8-a9f1-4c31-a254-7a5f8477042c&pd_rd_wg=XWO5U&pf_rd_r=66M6HZ2P9QTK992J5CXE&ref_=pd_gw_unk&pd_rd_w=Potrc&pd_rd_r=87982f33-2aad-465a-85ca-70104eac5d22" or givenURL == "https://www.amazon.com/AmazonBasics-Hardside-Spinner-Luggage-20-Inch/dp/B071VG5N9D"):
     x = {
         "Price":49.99,
         "Image":"https://images-na.ssl-images-amazon.com/images/I/91SJsAkdZDL._UX679_.jpg",
