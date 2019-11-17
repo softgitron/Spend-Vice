@@ -95,7 +95,7 @@ def plot(products):
 
         p.y_range.start = 0
         p.y_range.end = y_range_end
-        #Don't touch, will F up formatting if more than ~3 items.
+        
         p.plot_width = 540
         p.x_range.range_padding = 0.1
         p.xgrid.grid_line_color = None
